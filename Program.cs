@@ -60,6 +60,25 @@ namespace DoublyLinkedList
             newnode.next = current;
             newnode.prev = previous;
 
+            /*If the node is to be inserted at the end of the list.*/
+            if (current == null)
+            {
+                newnode.next = null;
+                previous.next = newnode;
+                return;
+            }
+            current.prev = newnode;
+            previous.next = newnode;
+        }
+        
+        /*Checks wheteher the specified node is present*/
+        public bool Search(int rollNo, ref Node previous, ref Node current)
+        {
+            for ( previous = current = START; current != null && rollNo != current.rollNumber; previous = current,current = current.next)
+            { }
+            /*The above for loop traverses the list. If the specified node
+             * is found then the function returns true, otherwise false.*/
+            return (current != null);
         }
     }
 }
