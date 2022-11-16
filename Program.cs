@@ -39,7 +39,27 @@ namespace DoublyLinkedList
                     Console.WriteLine("\nDuplicate roll numbers not allowed");
                     return;
                 }
+                newnode.next = START;
+                if (START != null)
+                    START.prev = newnode;
+                newnode.prev = null;
+                START = newnode;
+                return;
             }
+            Node previous, current;
+            for (current = previous = START; current != null && rollNO >= current.rollNumber; previous = current, current = current.next)
+            {
+                if (rollNO == current.rollNumber)
+                {
+                    Console.WriteLine("\nDuplicate roll numbers not allowed");
+                    return;
+                }
+            }
+            /*On the execution of the above for loop, prev and 
+             * current will point to those nodes between which the new node is to be inserted.*/
+            newnode.next = current;
+            newnode.prev = previous;
+
         }
     }
 }
