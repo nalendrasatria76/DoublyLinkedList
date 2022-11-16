@@ -117,7 +117,7 @@ namespace DoublyLinkedList
             }
         }
         /*traverses the list in the reverse direction*/
-        public void retraverse()
+        public void revtraverse()
         {
             if (listEmpty())
                 Console.WriteLine("\nList is empty");
@@ -141,6 +141,91 @@ namespace DoublyLinkedList
                 return true;
             else
                 return false;
+        }
+        static void Main(string[] args)
+        {
+            DoubleLinkedList obj = new DoubleLinkedList();
+            while (true)
+            {
+                try
+                {
+                    Console.WriteLine("\n Menu +" +
+                        "\n 1. Add a record to the list" +
+                        "\n 2. Deleted a record from the list" +
+                        "\n 3. View all records in the ascending order of roll numbers" +
+                        "\n 4. View all records in the descending order of roll numbers" +
+                        "\n 5. Search for a record in the list" +
+                        "\n 6. Exit \n" +
+                        "\n Enter your choice (1-6): ");
+                    char ch = Convert.ToChar(Console.ReadLine());
+                    switch (ch)
+                    {
+                        case '1':
+                            {
+                                obj.addnote();
+                            }
+                            break;
+                        case '2':
+                            {
+                                if (obj.listEmpty())
+                                {
+                                    Console.WriteLine("\nList is empty");
+                                    break;
+                                }
+                                Console.Write("\nEnter the roll number of the student" + " whose record is to be deleted: ");
+                                int rollNo = Convert.ToInt32(Console.ReadLine());
+                                Console.WriteLine();
+                                if (obj.delNode(rollNo) == false)
+                                    Console.WriteLine("Record not found");
+                                else
+                                    Console.WriteLine("Record with roll number" + rollNo + " deleted \n");
+                            }
+                            break;
+                        case '3':
+                            {
+                                obj.traverse();
+                            }
+                            break;
+                        case '4':
+                            {
+                                obj.revtraverse();
+                            }
+                            break;
+                        case '5':
+                            {
+                                if (obj.listEmpty() == true)
+                                {
+                                    Console.WriteLine("\nList is empty");
+                                    break;
+                                }
+                                Node prev, curr;
+                                prev = curr = null;
+                                Console.Write("\nEnter the roll number of the student whose record you want to search: ");
+                                int num = Convert.ToInt32(Console.ReadLine());
+                                if (obj.Search(num, ref prev, ref curr) == false)
+                                    Console.WriteLine("\nRecord not found");
+                                else
+                                {
+                                    Console.WriteLine("\nList is empty");
+                                    Console.WriteLine("\nRoll number: " + curr.rollNumber);
+                                    Console.WriteLine("\nName: " + curr.name);
+                                }
+                            }
+                            break;
+                        case '6':
+                            return;
+                        default:
+                            {
+                                Console.WriteLine("\nInvalid option");
+                            }
+                            break;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Check for the values entered.");
+                }
+            }
         }
     }
 }
